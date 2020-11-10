@@ -17,10 +17,13 @@ class Login extends Component {
       <Container
         fixed
         style={{
+          minWidth: "100vw",
           height: "100vh",
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
+          background: "url(/images/background.png)",
+          backgroundSize: "cover",
         }}
       >
         <Paper elevation={1} className="paper">
