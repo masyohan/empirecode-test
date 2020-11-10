@@ -27,38 +27,40 @@ class Login extends Component {
       >
         <Paper elevation={1} className="paper">
           <h2 style={{ margin: "0" }}>EmpireCode Login</h2>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            className="textfield"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            style={{ width: "60%", margin: "auto" }}
-            fullWidth
-            variant="contained"
-            color="primary"
-          >
-            Sign In
-          </Button>
+          <form>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              className="textfield"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              style={{ width: "60%", margin: "auto" }}
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Sign In
+            </Button>
+          </form>
         </Paper>
       </Container>
     );
