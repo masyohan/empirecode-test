@@ -1,6 +1,7 @@
 .paper {
   width: 40%;
   margin: auto;
+  text-align: center;
   padding: 5% 5% 5% 5%;
   background: rgba(255, 255, 255, 0.85) !important;
 }

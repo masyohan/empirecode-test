@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { Component } from "react";
 import { Formik } from "formik";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
@@ -51,7 +50,13 @@ class Login extends Component {
             id="password"
             autoComplete="current-password"
           />
-          <Button type="submit" fullWidth variant="contained" color="primary">
+          <Button
+            type="submit"
+            style={{ width: "60%", margin: "auto" }}
+            fullWidth
+            variant="contained"
+            color="primary"
+          >
             Sign In
           </Button>
         </Paper>
