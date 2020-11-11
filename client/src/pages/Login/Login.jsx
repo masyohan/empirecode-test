@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter, Redirect } from "react-router-dom";
+import { authenticate, AuthContext } from "../../helpers/auth/auth";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Container from "@material-ui/core/Container";
@@ -8,9 +10,11 @@ import Button from "@material-ui/core/Button";
 import "./Login.css";
 
 class Login extends Component {
+  static contextType = AuthContext;
   constructor(props) {
     super(props);
     this.state = {
+      error: {},
       initialValues: {
         email: "",
         password: "",
@@ -24,11 +28,23 @@ class Login extends Component {
     };
   }
   handleSubmit = (values, { setSubmitting }) => {
-    alert(JSON.stringify(values));
+    const { auth, setAuth } = this.context;
+    authenticate(values, (error, result) => {
+      if (error) {
+        this.setState({ error: error.response.data });
+      } else {
+        console.log(result);
+        setAuth({ isAuthenticated: true });
+      }
+    });
     setSubmitting(false);
   };
 
   render() {
+    const { auth, setAuth } = this.context;
+    if (auth.isAuthenticated) {
+      return <Redirect to="dashboard" />;
+    }
     return (
       <Container
         fixed
@@ -59,6 +75,7 @@ class Login extends Component {
               handleSubmit,
             }) => (
               <form onSubmit={handleSubmit}>
+                <p className="invalid-feedback">{this.state.error.message}</p>
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -112,52 +129,10 @@ class Login extends Component {
               </form>
             )}
           </Formik>
-          {/* <Formik
-            initialValues={this.state.initialValues}
-            validationSchema={this.state.validationSchema}
-            onSubmit={this.handleSubmit}
-          >
-            {({ errors, status, touched }) => (
-              <Form>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  className="textfield"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-                <Button
-                  type="submit"
-                  style={{ width: "60%", margin: "auto" }}
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                >
-                  Sign In
-                </Button>
-              </Form>
-            )}
-          </Formik> */}
         </Paper>
       </Container>
     );
   }
 }
 
-export default Login;
+export default withRouter(Login);
