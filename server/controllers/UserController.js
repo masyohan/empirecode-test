@@ -25,6 +25,7 @@ class UserController {
       }
     });
   }
+
   static validate(req, res, next) {
     res.status(200).json({
       success: true,
